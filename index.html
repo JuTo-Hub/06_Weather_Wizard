@@ -6,41 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather on the Fly!</title>
     <link rel="stylesheet" href="./Assets/style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/open-weather/2.0.0/openweather.min.js"
-        integrity="sha512-mlRoH3bU+q4t5clJkMwltJcka6JyNWsUJybBclHUiU0Bdux6LtcNqO8XMNi9/vp4+KCteAbc0hYnHU4Rh2SH+g=="
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark" id="Navbar1">
         <span class="navbar h1" style="color: white">Weather Dashboard</span>
     </nav>
-
-    What city are you looking for?
-    <br>
-    <input type="text" class="searchTerm" placeholder="Which city?">
-    <button type="button" class="btn btn-secondary btn-sm" id="input">🔎</button>
-    <div id="cityList" class="list-group">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                What city are you looking for?
+                <br>
+                <input type="text" class="searchTerm" placeholder="Which city?">
+                <button type="button" class="btn btn-secondary btn-sm" id="input">🔎</button>
+                <div id="cityList" class="list-group"></div>
+            </div>
+            <div class="col-8">
+                <h1>
+                    <span id="cityName"></span>
+                    <span id="todayDate"></span>
+                    <img id="icon"></img>
+                </h1>
+                <p class="city icon"></p>
+                <p id="tempF"></p>
+                <p id="currentHumidity"></p>
+                <p id="currentWind"></p>
+                <p id="currentUV"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card col-12">
+                <h2>5 Day Forecast:</h2>
+                <div id="fiveDayForecastContainer"></div>
+            </div>
+        </div>
     </div>
-
-    <div class="card">
-        <h1>
-            <span id="cityName"></span> 
-            <span id="todayDate"></span>
-            <img id="icon"></img></h1>
-        <p class="city icon"></p>
-        <p id="tempF"></p>
-        <p id="currentHumidity"></p>
-        <p id="currentWind"></p>
-        <p id="currentUV"></p>
-    </div>
-
-    <h1>5 Day Forecast:</h1>
-    <div id="fiveDayForecastContainer" ></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/open-weather/2.0.0/openweather.min.js"
+        integrity="sha512-mlRoH3bU+q4t5clJkMwltJcka6JyNWsUJybBclHUiU0Bdux6LtcNqO8XMNi9/vp4+KCteAbc0hYnHU4Rh2SH+g=="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="./Assets/script.js"></script>
 </body>
 

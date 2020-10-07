@@ -17,9 +17,9 @@ function getDateFromTimestamp(UNIX_timestamp){
   }
 
 var dateObj = new Date();
-var month = dateObj.getUTCMonth() + 1; //months from 1-12
-var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear();
+var month = dateObj.getMonth() + 1; //months from 1-12
+var day = dateObj.getDate();
+var year = dateObj.getFullYear();
 
 function searchForCity(city){
     if(!(cityList.includes(city))){
@@ -29,9 +29,9 @@ function searchForCity(city){
     
     $("#cityName").text(city)
     var dt = new Date()
-    var month = dt.getUTCMonth() + 1; //months from 1-12
-    var day = dt.getUTCDate();
-    var year = dt.getUTCFullYear();
+    var month = dt.getMonth() + 1; //months from 1-12
+    var day = dt.getDate();
+    var year = dt.getFullYear();
     
     $("#todayDate").text(month + "/" + day + "/" + year)
     console.log(input)
@@ -53,7 +53,7 @@ function searchForCity(city){
             var tempF = KToF(response.main.temp);
             $("#icon").attr("src",`http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
             // Transfer content to HTML
-            $("#tempF").text("Temperature (F) " + tempF);
+            $("#tempF").text("Temperature (F) " + tempF.toFixed());
             $("#currentHumidity").text("Humidity: " + response.main.humidity + "%");
             $("#currentWind").text("Wind Speed: " + response.wind.speed);
 
@@ -80,22 +80,23 @@ function searchForCity(city){
                 // HERES THE FORECAST
                 var container = $("#fiveDayForecastContainer");
                 container.empty();
-                for (var i = 0; i < 5; i++)
+                for (var i = 1; i < 6; i++)
                 {
                     
                     var newForecast= $("<div>")
-                    newForecast.addClass("card");
+                    newForecast.addClass("card col-2");
                     
                     var dateJq = $("<div>")
                     dateJq.text(getDateFromTimestamp(r.daily[i].dt))
                     newForecast.append(dateJq)
-
+                    var iconContainer = $("<div>")
                     var icon = $("<img>")
                     icon.attr("src", `http://openweathermap.org/img/wn/${r.daily[i].weather[0].icon}.png`)
-                    newForecast.append(icon)
+                    iconContainer.append(icon);
+                    newForecast.append(iconContainer);
 
                     var temp = $("<div>")
-                    temp.text(`Temp: ${KToF(r.daily[i].temp.day)} F`)
+                    temp.text(`Temp: ${KToF(r.daily[i].temp.day).toFixed(1)} F`)
                     newForecast.append(temp)
 
                     var humidity = $("<div>")
@@ -126,11 +127,11 @@ function searchForCity(city){
         cityList.forEach((city) => {
             var a = $("<a>");
             a.addClass("list-group-item list-group-item-action");
-            a.attr("data-name");
+            
             a.text(city);
             $("#cityList").append(a);
-            a.click((name)=>{
-                searchForCity(name)
+            a.click((anchor)=>{
+                searchForCity(anchor.target.text)
             })
         })
     }
